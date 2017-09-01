@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+/*
+  module: m-box-fixed
+  - 固定幅・中央揃えのボックス
+*/
+[data-fixed] {
+	width: $fixedWidth;
+	margin: 0 auto;
+}
+
+.m-box-cond {
+	max-height: calc(100vh - 100px);
+	padding: 10px 10px 10px 0;
+	overflow: auto;
+
+	ul {
+		li {
+			margin-top: 20px;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			dl {
+				dt {
+					position: relative;
+					margin-bottom: 10px;
+					padding: 10px;
+					background: #eee;
+					font-weight: bold;
+					cursor: pointer;
+
+					> span {
+						position: absolute;
+						width: 15px;
+						height: 15px;
+						top: 0;
+						bottom: 0;
+						right: 10px;
+						left: auto;
+						margin: auto;
+
+						&:before,
+						&:after {
+							content: '';
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							right: 0;
+							left: 0;
+							width: 15px;
+							height: 1px;
+							margin: auto;
+							background: #000;
+						}
+
+						&:after {
+							transform: rotate(270deg);
+						}
+
+						&.is-active {
+							&:before {
+								display: none;
+							}
+						}
+					}
+					&.is-active + dd {
+						display: block !important;
+					}
+				}
+
+				dd {
+					display: none;
+					padding: 0 10px;
+				}
+			}
+
+			input[type=text] {
+				width: 100%;
+			}
+
+			label {
+				display: block;
+				margin-top: 10px;
+			}
+		}
+	}
+}
+
+.m-box-result {
+	max-height: calc(100vh - 100px);
+	padding: 10px 10px 10px 0;
+	overflow: auto;
+
+	table {
+		th,td {
+			white-space: nowrap;
+		}
+	}
+}

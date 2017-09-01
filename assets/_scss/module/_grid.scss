@@ -1,0 +1,11 @@
+[data-gs] {
+	@include clearfix;
+}
+[data-gs-col="4"] {
+	float: left;
+	width: 100% / 12 * 4;
+}
+[data-gs-col="8"] {
+	float: left;
+	width: 100% / 12 * 8;
+}

@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+@import "core";
+
+// width
+@for $i from 1 through 100 {
+	.w#{$i}p { width: 1% * $i !important; }
+}
+
+// media query flex margin
+.mats {
+	margin-top: 15px;
+
+	@include viewSp {
+	}
+}
+.matm {
+	margin-top: 40px;
+
+	@include viewSp {
+	}
+}
+.matl {
+	margin-top: 60px;
+
+	@include viewSp {
+	}
+}
+
+// font weight
+.fw	{ font-weight: bold !important; }
+
+// font color
+.cred { color: #c00 !important; }
+
+// media query display
+.view-pc {
+	display: block;
+}
+.view-sp {
+	display: none;
+
+	@include viewSp {
+		display: block;
+	}
+}

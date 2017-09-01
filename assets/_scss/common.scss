@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+@import "core";
+
+//リセット
+@import "core/normalize";
+@import "core/minimum_reset";
+@import "core/helper";
+
+@import "module/box";
+@import "module/icon";
+@import "module/list";
+@import "module/table";
+@import "module/text";
+@import "module/btn";
+@import "module/grid";
+
+html {
+	color: $defaultTxtColor;
+	font-size: $defaultTxtSize;
+	background: $defaultBgColor;
+	font-family: "Hiragino Maru Gothic W4 JIS2004", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+	font-size: 62.5%;
+}
+
+body {
+	line-height: $lineHeight;
+	font-size: 1.6rem;
+}
+
+/* link style */
+// a:link {
+// 	color: $defaultLinkColor;
+// 	text-decoration: none;
+// }
+
+// a:visited {
+// 	color: $defaultLinkVisitedColor;
+// 	text-decoration: none;
+// }
+
+// a:hover, a:active {
+// 	color: $defaultLinkHoverColor;
+// 	text-decoration: underline;
+// }
+
+/* header style */
+#l-header {
+	padding: 20px 0 30px 0;
+
+	h1 {
+		font-size: 250%;
+	}
+
+	// media query for smartphone
+	@include viewSp() {
+
+	}
+}
+
+/* topicpath */
+#l-topicpath {
+	@include clearfix;
+
+	li {
+		display: inline-block;
+		margin-right: 6px;
+		padding-right: 12px;
+
+		&:last-child {
+			margin-right: 0;
+			padding-right: 0;
+			font-weight: bold;
+			background: none;
+		}
+	}
+}
+
+/* content style */
+#l-content {
+	h2 {
+		margin-bottom: 30px;
+		font-size: 150%;
+	}
+}
+
+/* footer style */
+#l-footer {
+}
+
+.pagination li {
+	cursor: pointer;
+}
+
+/* print style */
+@media print {
+	html {
+		background: none;
+	}
+
+	body {
+		padding: 0;
+		background: none;
+	}
+
+	/* for IE7 */
+	*:first-child + html body {
+		zoom: 67%;
+	}
+}

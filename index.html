@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="lt-ie10 lt-ie9"><![endif]-->
+<!--[if IE 9]><html class="lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="ja"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>サイトタイトル</title>
+	<meta name="description" content="概要文">
+	<meta name="keywords" content="キーワード">
+	<meta name="viewport" content="width=1024">
+	<!-- レスポンシブ用 必要に応じて利用
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	-->
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="ページタイトル">
+	<meta property="og:site_name" content="サイトタイトル">
+	<meta property="og:url" content="ページのURL">
+	<meta property="og:description" content="概要文">
+	<meta property="og:image" content="facebookに表示する画像">
+
+	<meta name="twitter:card" content="カードタイプ">
+	<meta name="twitter:site" content="@アカウント名">
+	<meta name="twitter:title" content="ページタイトル">
+	<meta name="twitter:description" content="概要文">
+	<meta name="twitter:image" content="twitterに表示する画像">
+
+	<link rel="canonical" href="ウェブサイトURL（トップページのみでOK）">
+
+	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="assets/css/common.css">
+	<link rel="stylesheet" href="assets/css/unique/top.css">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" sizes="152x152" href="apple_touch_icon.png">
+
+	<!--[if lt IE 9]>
+	<script src="assets/lib/html5shiv/html5shiv-printshiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<noscript>JavascriptがOFFのため正しく表示されない可能性があります。</noscript>
+
+	<!-- [ WRAP ] -->
+	<div id="app">
+		<!-- [ GLOBAL HEADER ] -->
+		<div id="l-header">
+			<div class="container-fluid">
+				<h1>ProductSearch Demo Site</h1>
+			</div>
+		</div>
+		<!-- [ /GLOBAL HEADER ] -->
+
+		<!-- [ CONTENT ] -->
+		<div id="l-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-2">
+						<div class="m-box-cond">
+							<p>
+								<button type="button" class="btn btn-secondary btn-lg" v-on:click="clearForm">すべての検索条件を解除する</button>
+							</p>
+
+							<form>
+								<ul class="mats">
+									<li>
+										<dl>
+											<dt v-bind:class="{'is-active': isActive}" v-on:click="isActive=!isActive">型式<span class="toggle"></span></dt>
+											<dd>
+												<input type="text" v-model="qCode">
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt v-bind:class="{'is-active': isActive2}" v-on:click="isActive2=!isActive2">メーカー<span class="toggle"></span></dt>
+											<dd>
+												<label v-for="c in makers">
+												<input type="checkbox" v-bind:value="c" v-model="qMaker">
+													{{c}}
+												</label>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt v-bind:class="{'is-active': isActive3}" v-on:click="isActive3=!isActive3">カラー<span class="toggle"></span></dt>
+											<dd>
+												<label v-for="c in colors">
+												<input type="checkbox" v-bind:value="c" v-model="qColor">
+												{{c}}
+												</label>
+											</dd>
+										</dl>
+									</li>
+								</ul>
+							</form>
+						</div>
+					</div>
+
+					<div class="col-10">
+						<div class="m-box-result">
+							<p>
+								{{result.length}}件の商品が見つかりました
+							</p>
+
+							<ul class="pagination justify-content-end mats">
+								<li class="page-item" v-on:click="showFirst" v-bind:class="{ disabled: isStartPage }"><a class="page-link">&laquo;</a></li>
+								<li class="page-item" v-on:click="showPrev" v-bind:class="{ disabled: isStartPage }"><a class="page-link">&lt;</a></li>
+								<li class="page-item" v-on:click="showPage(index-1)" v-for="index in pageCount" v-bind:class="{active: getCurrent(index-1)}"><a class="page-link">{{index}}</a></li>
+								<li class="page-item" v-on:click="showNext" v-bind:class="{ disabled: isEndPage }"><a class="page-link">&gt;</a></li>
+								<li class="page-item" v-on:click="showLast" v-bind:class="{ disabled: isEndPage }"><a class="page-link">&raquo;</a></li>
+							</ul>
+
+							<form action="comparison.html" method="get" target="comparison">
+								<p class="mats">
+									<button type="submit" class="btn btn-primary btn-lg">製品を比較する</button>
+								</p>
+								<table class="table table-bordered mats">
+									<thead>
+										<tr>
+											<th class="w3p">比較</th>
+											<th class="w10p">型式</th>
+											<th class="w50p">メーカー名</th>
+											<th class="w10p">種類</th>
+											<th class="w10p">白黒/カラー</th>
+											<th class="w10p">解像度</th>
+											<th class="w10p">ﾌﾚｰﾑﾚｰﾄ(fps)/ﾗｲﾝﾚｰﾄ(kHz)</th>
+											<th class="w10p">I/F</th>
+											<th class="w10p">波長</th>
+											<th class="w10p">レンズマウント</th>
+											<th class="w10p">CCD/CMOS</th>
+											<th class="w10p">センサーサイズ</th>
+											<th class="w10p">用途</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="l in filteredView">
+											<td>
+												<input type="checkbox" name="code[]" v-bind:value="l.code">
+											</td>
+											<td>{{l.code}}</td>
+											<td>{{l.maker}}</td>
+											<td>{{l.type}}</td>
+											<td>{{l.color}}</td>
+											<td>{{l.pixcel}}</td>
+											<td>{{l.frame}}</td>
+											<td>{{l.if}}</td>
+											<td>{{l.wavelength}}</td>
+											<td>{{l.mount}}</td>
+											<td>{{l.ccd_cmos}}</td>
+											<td>{{l.sensor}}</td>
+											<td>{{l.touse}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+
+							<ul class="pagination justify-content-end mats">
+								<li class="page-item" v-on:click="showFirst" v-bind:class="{ disabled: isStartPage }"><a class="page-link">&laquo;</a></li>
+								<li class="page-item" v-on:click="showPrev" v-bind:class="{ disabled: isStartPage }"><a class="page-link">&lt;</a></li>
+								<li class="page-item" v-on:click="showPage(index-1)" v-for="index in pageCount" v-bind:class="{active: getCurrent(index-1)}"><a class="page-link">{{index}}</a></li>
+								<li class="page-item" v-on:click="showNext" v-bind:class="{ disabled: isEndPage }"><a class="page-link">&gt;</a></li>
+								<li class="page-item" v-on:click="showLast" v-bind:class="{ disabled: isEndPage }"><a class="page-link">&raquo;</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- [ /CONTENT ] -->
+
+		<!-- [ GLOBAL FOOTER ] -->
+		<div id="l-footer">
+
+		</div>
+		<!-- [ /GLOBAL FOOTER ] -->
+
+	</div>
+	<!-- [ WRAP ] -->
+
+	<script src="https://unpkg.com/vue"></script>
+	<script src="assets/js/library.js"></script>
+	<script src="assets/js/common.js"></script>
+	<script src="assets/js/analytics.js"></script>
+<script>
+
+
+</script>
+</body>
+</html>
